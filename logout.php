@@ -2,6 +2,6 @@
 session_start();
 session_unset();
 session_destroy();
-header( "Location: http://localhost/Aule/index.php");
+header( "Location: http://localhost/SitoAule/index.php");
 die();
 ?>

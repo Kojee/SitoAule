@@ -21,3 +21,7 @@ a.list-group-item {
 .list-group {
     border: 0px;
 }
+
+.date-label {
+    padding: 3px;
+}

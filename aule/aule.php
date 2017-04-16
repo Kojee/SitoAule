@@ -37,7 +37,7 @@
                         if ($stm->execute()) {
                             $result = $stm->get_result();
                             while($row = $result->fetch_assoc()){
-                                echo    '<a href="https://localhost/SitoAule/prenotazioni/prenota.php?aula=' . $row["nome"] . '" class="list-group-item">
+                                echo    '<a href="https://localhost/SitoAule/prenotazioni/prenotaForm.php?aula=' . $row["nome"] . '" class="list-group-item">
                                         <h4 class="list-group-item-heading">' . $row["nome"] . '</h4>
                                         <p class="list-group-item-text">' . $row["info"] . '</p>
                                         </a>';

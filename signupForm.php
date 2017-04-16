@@ -31,6 +31,14 @@ session_start();
                         <input type="text" class="form-control" name="username" placeholder="Username"><br>
                         </div>
                         <div class="form-group">
+                        <label>Nome:</label><br>
+                        <input type="text" class="form-control" name="nome" placeholder="Nome"><br>
+                        </div>
+                        <div class="form-group">
+                        <label>Cognome:</label><br>
+                        <input type="text" class="form-control" name="cognome" placeholder="Cognome"><br>
+                        </div>
+                        <div class="form-group">
                         <label>Password:</label><br>
                         <input type="password" class="form-control" name="password" id="pass"><br>
                         </div>

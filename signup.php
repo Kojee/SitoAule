@@ -6,7 +6,8 @@
     $dbname = "utenti";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
-
+    $nome = $_POST["nome"];
+    $cognome = $_POST["cognome"];
     $username = mysqli_real_escape_string($conn, $_POST["username"]);
     if(strcmp($_POST["password"], $_POST["passwordCheck"]) >= 0){
         $passwordHash = hash("sha512", $_POST["password"]);
@@ -20,13 +21,16 @@
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    $stm = $conn->prepare("insert into utenti (username, passwordHash, admin) values(?, ?, false )");
-    $stm->bind_param("ss", $username, $passwordHash);
+    $stm = $conn->prepare("insert into utenti (username, nome, cognome, passwordHash, admin) values(?, ?, ?, ?, false )");
+    $stm->bind_param("ssss", $username, $nome, $cognome, $passwordHash);
 
 
     if ($stm->execute()) {
         $cookieFirstVisitName = "firstVisitSitoAule";
         setcookie($cookieFirstVisitName, "false", time() + (86400 * 30), "/");
+        $_SESSION["username"] = $username;
+        $_SESSION["nome"] = $nome;
+        $_SESSION["cognome"] = $cognome;
         header("Location: http://localhost/SitoAule/index.php?status=ok");
     }else{
         header("Location: http://localhost/SitoAule/index.php?status=err" . mysqli_error($conn));

@@ -26,25 +26,25 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
-                <div class="list-group">
-                    <?php
-                        if ($conn->connect_error) {
+                <?php
+                    if ($conn->connect_error) {
                             die("Connection failed: " . mysqli_connect_error());
                         }
 
-                        $stm = $conn->prepare("select nome, info from aule");
+                        $stm = $conn->prepare("select nome, cognome, nomeAula, data from prenotazioni where nomeAula = ?");
+                        $stm->bind_param("s", $_GET["aula"]);
 
                         if ($stm->execute()) {
                             $result = $stm->get_result();
                             while($row = $result->fetch_assoc()){
-                                echo    '<a href="https://localhost/SitoAule/prenotazioni/prenota.php?aula=' . $row["nome"] . '" class="list-group-item">
-                                        <h4 class="list-group-item-heading">' . $row["nome"] . '</h4>
-                                        <p class="list-group-item-text">' . $row["info"] . '</p>
+                                echo    '<a href="https://localhost/SitoAule/aule/aule.php?aula=' . $row["nomeAula"] . '" class="list-group-item">
+                                        <h4 class="list-group-item-heading">' . $row["nomeAula"] . '</h4>
+                                        <span class="label label-default">' . $row["data"] . '</span>
+                                        <p class="list-group-item-text">Prenotata da ' . $row["nome"] . ' ' . $row["cognome"] . '</p>
                                         </a>';
                             }
                         }
-                    ?>
-                </div>         
+                ?>
             </div>
             <div class="col-md-4"></div>
         </div>

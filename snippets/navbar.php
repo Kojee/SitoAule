@@ -8,7 +8,7 @@
                             </div>
                             <ul class="nav navbar-nav">
                             <li><a href="http://localhost/SitoAule/aule/aule.php">Aule</a></li>
-                            <li><a href="#">Prenota</a></li>
+                            <li><a href="http://localhost/SitoAule/prenotazioni/prenota.php">Prenota</a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">';
                     echo    '<li><a href="http://localhost/SitoAule/profile/profile.php"><span class="glyphicon glyphicon-user"></span> Benvenuto ' . $_SESSION["username"] . ' </a></li>';
@@ -23,7 +23,7 @@
                             <a class="navbar-brand" href="http://localhost/SitoAule/index.php">Sito Aule</a>
                             </div>
                             <ul class="nav navbar-nav">
-                            <li><a href="#">Aule</a></li>
+                            <li><a href="http://localhost/SitoAule/aule/aule.php">Aule</a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">';
                     echo    '<li><a href="http://localhost/SitoAule/signupForm.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>';

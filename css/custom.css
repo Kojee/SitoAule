@@ -13,3 +13,11 @@ body{
 .navbar {
     margin: 0px;
 }
+
+a.list-group-item {
+    margin-top: 20px;
+}
+
+.list-group {
+    border: 0px;
+}

@@ -25,6 +25,8 @@
 
 
     if ($stm->execute()) {
+        $cookieFirstVisitName = "firstVisitSitoAule";
+        setcookie($cookieFirstVisitName, "false", time() + (86400 * 30), "/");
         header("Location: http://localhost/SitoAule/index.php?status=ok");
     }else{
         header("Location: http://localhost/SitoAule/index.php?status=err" . mysqli_error($conn));

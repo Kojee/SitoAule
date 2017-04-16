@@ -1,0 +1,15 @@
+html{
+    height: 100%;
+}
+body{
+    height: 100%;
+}
+.jumbotron {
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.navbar {
+    margin: 0px;
+}

@@ -1,6 +1,8 @@
 <?php
     session_start();
-
+    
+    
+    
 ?>
 <html>
     <head>
@@ -12,16 +14,11 @@
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/custom.css">
     </head>
     <body>
 
         <?php require "../snippets/navbar.php";?>
-        <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-                           
-            </div>
-            <div class="col-md-4"></div>
-        </div>
+        
     </body>
 </html>

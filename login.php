@@ -14,7 +14,7 @@
         die("Connection failed: " . mysqli_connect_error());
     }
 
-   $stm = $conn->prepare("select username, nome, cognome from utenti where username = ? and passwordHash = ?");
+   $stm = $conn->prepare("select username, nome, cognome, admin from utenti where username = ? and passwordHash = ?");
     $stm->bind_param("ss", $username, $passHash);
 
     //$stm = $conn->("select username from utente where username = '" . $username . "' and passwordHash = '" . $passHash . "'");
@@ -26,6 +26,9 @@
             $_SESSION["username"] = $username;
             $_SESSION["nome"] = $row["nome"];
             $_SESSION["cognome"] = $row["cognome"];
+            if($row["admin"] === "true"){
+                $_SESSION["admin"] = "true";
+            }
             header("Location: http://localhost/SitoAule/index.php?status=ok");
         }
         else{

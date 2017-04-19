@@ -14,7 +14,7 @@ body{
     margin-bottom: 10px;
 }
 
-a.list-group-item {
+.list-group-item {
     margin-top: 20px;
 }
 
@@ -25,3 +25,4 @@ a.list-group-item {
 .date-label {
     padding: 3px;
 }
+

@@ -13,7 +13,7 @@
         $passwordHash = hash("sha512", $_POST["password"]);
     }
     else{
-        header("Location: http://localhost/SitoAule/index.php?status=err");
+        header("Location: http://localhost/SitoAule/results/azioneFallita.php");
         die();
     }
     // Check connection
@@ -31,9 +31,9 @@
         $_SESSION["username"] = $username;
         $_SESSION["nome"] = $nome;
         $_SESSION["cognome"] = $cognome;
-        header("Location: http://localhost/SitoAule/index.php?status=ok");
+        header("Location: http://localhost/SitoAule/results/successo.php");
     }else{
-        header("Location: http://localhost/SitoAule/index.php?status=err" . mysqli_error($conn));
+        header("Location: http://localhost/SitoAule/results/azioneFallita.php");
     }
 
     mysqli_close($conn);

@@ -15,28 +15,7 @@ session_start();
 </head>
 <body>
 
-<nav class="navbar navbar-inverse navbar-static-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="index.php">Sito Aule</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li><a href="#">Page 1</a></li>
-            <li><a href="#">Page 2</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <?php
-            if(isset($_SESSION["username"])){
-                echo '<li><a href="profile.php"><span class="glyphicon glyphicon-user"></span> Benvenuto ' . $_SESSION["username"] . ' </a></li>';
-                echo '<li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>';
-            }else{
-                echo '<li><a href="signupForm.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>';
-                echo '<li><a href="loginForm.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>';
-            }
-            ?>
-        </ul>
-    </div>
-</nav>
+<?php require "/snippets/navbar.php";?>
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
@@ -50,6 +29,14 @@ session_start();
                         <div class="form-group">
                         <label>Username:</label><br>
                         <input type="text" class="form-control" name="username" placeholder="Username"><br>
+                        </div>
+                        <div class="form-group">
+                        <label>Nome:</label><br>
+                        <input type="text" class="form-control" name="nome" placeholder="Nome"><br>
+                        </div>
+                        <div class="form-group">
+                        <label>Cognome:</label><br>
+                        <input type="text" class="form-control" name="cognome" placeholder="Cognome"><br>
                         </div>
                         <div class="form-group">
                         <label>Password:</label><br>

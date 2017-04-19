@@ -1,6 +1,8 @@
 <?php
     session_start();
-
+    
+    
+    
 ?>
 <html>
     <head>
@@ -12,37 +14,42 @@
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/custom.css">
     </head>
     <body>
 
-        <nav class="navbar navbar-inverse navbar-static-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index.php">Sito Aule</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li><a href="#">Page 1</a></li>
-                    <li><a href="#">Page 2</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <?php
-                    if(isset($_SESSION["username"])){
-                        echo '<li><a href="profile.php"><span class="glyphicon glyphicon-user"></span> Benvenuto ' . $_SESSION["username"] . ' </a></li>';
-                        echo '<li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>';
+        <?php require "/snippets/navbar.php";?>
+        <div class="jumbotron">
+            <div class="container">
+                <?php
+                
+                    $cookieFirstVisitName = "firstVisitSitoAule";
+                    if(!isset($_COOKIE[$cookieFirstVisitName])){
+                        $cookieFirstVisitValue = "true";
+                        setcookie($cookieFirstVisitName, $cookieFirstVisitValue, time() + (86400 * 30), "/");
+                        echo    '<h1> Benvenuto nel sito per la prenotazione delle aule dell\'ITIS A. Rossi </h1>
+                                <p>Prima di effettuare qualsiasi prenotazione per un\'aula, registrati: </p>
+                                <p><a class="btn btn-primary btn-lg" href="http://localhost/SitoAule/signupForm.php" role="button">Registrati</a></p>
+                                <p>Se sei già registrato, effettua l\'accesso: </p>
+                                <p><a class="btn btn-primary btn-lg" href="http://localhost/SitoAule/loginForm.php" role="button">Accedi</a></p>';
                     }else{
-                        echo '<li><a href="signupForm.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>';
-                        echo '<li><a href="loginForm.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>';
+                        if(strcmp($_COOKIE[$cookieFirstVisitName], "true") == 0){
+                            $cookieFirstVisitValue = "true";
+                            setcookie($cookieFirstVisitName, $cookieFirstVisitValue, time() + (86400 * 30), "/");
+                            echo    '<h1> Benvenuto nel sito per la prenotazione delle aule dell\'ITIS A. Rossi </h1>
+                                    <p>Prima di effettuare qualsiasi prenotazione per un\'aula, registrati: </p>
+                                    <p><a class="btn btn-primary btn-lg" href="http://localhost/SitoAule/signupForm.php" role="button">Registrati</a></p>
+                                    <p>Se sei già registrato, effettua l\'accesso: </p>
+                                    <p><a class="btn btn-primary btn-lg" href="http://localhost/SitoAule/loginForm.php" role="button">Accedi</a></p>';
+                        }else{
+                            $cookieFirstVisitValue = "false";
+                            setcookie($cookieFirstVisitName, $cookieFirstVisitValue, time() + (86400 * 30), "/");
+                        }
+                        
                     }
-                    ?>
-                </ul>
+                ?>
+                
             </div>
-        </nav>
-        <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-
-            </div>
-            <div class="col-md-4"></div>
         </div>
     </body>
 </html>

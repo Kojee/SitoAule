@@ -1,0 +1,29 @@
+html{
+    height: 100%;
+}
+body{
+    height: 100%;
+}
+.jumbotron {
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.navbar {
+    margin-bottom: 10px;
+}
+
+.list-group-item {
+    margin-top: 20px;
+    word-break:break-all;
+}
+
+.list-group {
+    border: 0px;
+}
+
+.date-label {
+    padding: 3px;
+}
+

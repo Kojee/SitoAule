@@ -5,7 +5,13 @@
         die();
     }
 
-    ?>
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "utenti";
+
+    $conn = new mysqli($servername, $username, $password, $dbname);   
+?>
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -24,16 +30,24 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
-                <div class="list-group">
-                <a class="buttonWrapper" href="http://localhost/SitoAule/admin/inserisciForm.php"><button type="button" class="list-group-item">Inserisci Aula</button></a>
-                <a class="buttonWrapper" href="http://localhost/SitoAule/admin/rimuoviForm.php"><button type="button" class="list-group-item">Rimuovi Aula</button></a>
-                <a class="buttonWrapper" href="http://localhost/SitoAule/admin/modificaForm.php"><button type="button" class="list-group-item">Modifica Aula</button></a>
-                <a class="buttonWrapper" href="http://localhost/SitoAule/admin/listaUtenti.php"><button type="button" class="list-group-item">Visiona Utenti</button></a>
-                <a class="buttonWrapper" href="http://localhost/SitoAule/admin/prenotazioniForm.php"><button type="button" class="list-group-item">Visiona Prenotazioni</button></a>
+                <form action="inserisci.php" method="post">
+                <div class="form-group">
+                    <label >Aula:</label>
+                    <input type="text" class="form-control" name="nomeAula">
                 </div>
+                <div class="form-group">
+                    <label >Informazioni:</label>
+                    <input type="text" class="form-control" name="info">
+                </div>
+                <div class="form-group">
+                    <label>Tags (separati da una virgola):</label>
+                    <input type="text" class="form-control" name="tags">
+                </div>
+                <button type="submit" class="btn btn-default" >Crea aula</button>
+                </form>
+                
             </div>
             <div class="col-md-4"></div>
         </div>
-        
     </body>
 </html>

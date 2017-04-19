@@ -16,6 +16,7 @@ body{
 
 .list-group-item {
     margin-top: 20px;
+    word-break:break-all;
 }
 
 .list-group {

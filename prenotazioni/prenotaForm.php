@@ -4,6 +4,11 @@
         header("Location: http://localhost/SitoAule/index.php");
         die();
     }
+    $aula = "";
+    if(isset($_GET['aula']))
+    {
+        $aula = $_GET["aula"];
+    }
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -31,6 +36,10 @@
             <div class="col-md-4">
                 <form action="prenota.php" method="post">
                 <div class="form-group">
+                    <label >Aula</label>
+                    <input type="text" class="form-control" name="nomeAula" value="<?php echo $aula;?>">
+                </div>
+                <div class="form-group">
                     <label >Data</label>
                     <input type="date" class="form-control" name="data">
                 </div>
@@ -42,7 +51,11 @@
                 <input type="text" class="form-control" name="username" value="<?php echo $_SESSION["username"];?>">
                 <input type="text" class="form-control" name="nome" value="<?php echo $_SESSION["nome"];?>">
                 <input type="text" class="form-control" name="cognome" value="<?php echo $_SESSION["cognome"];?>">
-                <input type="text" class="form-control" name="nomeAula" value="<?php echo $_GET["aula"];?>">
+                <?php
+                    if(isset($_GET["exact"])){
+                        echo '<input type="text" class="form-control" name="exact" value="true">';
+                    }
+                ?>
                 </div>
                 <button type="submit" class="btn btn-default" >Prenota</button>
                 </form>

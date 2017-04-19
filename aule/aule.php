@@ -6,7 +6,7 @@
     $password = "";
     $dbname = "utenti";
 
-    $conn = new mysqli($servername, $username, $password, $dbname);   
+    $conn = mysqli_connect($servername, $username, $password, $dbname);   
 ?>
 <html>
     <head>
@@ -28,21 +28,39 @@
             <div class="col-md-4">
                 <div class="list-group">
                     <?php
-                        if ($conn->connect_error) {
+                        if (!$conn) {
                             die("Connection failed: " . mysqli_connect_error());
                         }
-
-                        $stm = $conn->prepare("select nome, info from aule");
-
-                        if ($stm->execute()) {
-                            $result = $stm->get_result();
-                            while($row = $result->fetch_assoc()){
-                                echo    '<a href="https://localhost/SitoAule/prenotazioni/prenotaForm.php?aula=' . $row["nome"] . '" class="list-group-item">
-                                        <h4 class="list-group-item-heading">' . $row["nome"] . '</h4>
-                                        <p class="list-group-item-text">' . $row["info"] . '</p>
-                                        </a>';
+                        if(isset($_GET["aule"])){
+                            $aule = explode(";", $_GET["aule"]);
+                            $param = "";
+                            foreach($aule as $aula){
+                                $param = $param . '"' . $aula . '",';
                             }
-                        }
+                            $param = $param . '"0"';
+                            $query = "select nome, info from aule where nome in ({$param})";
+                            echo $query;
+                            $result = mysqli_query($conn, $query);
+                               while($row = mysqli_fetch_assoc($result)) {
+                                    
+                                    echo    '<a href="https://localhost/SitoAule/prenotazioni/prenotaForm.php?aula=' . $row["nome"] . '&exact=true" class="list-group-item">
+                                            <h4 class="list-group-item-heading">' . $row["nome"] . '</h4>
+                                            <p class="list-group-item-text">' . $row["info"] . '</p>
+                                            </a>';
+                                }
+                            
+                        }else{
+                            $query = "select nome, info from aule";
+                        
+                            $result = mysqli_query($conn, $query);
+                               while($row = mysqli_fetch_assoc($result)) {
+                                    echo    '<a href="https://localhost/SitoAule/prenotazioni/prenotaForm.php?aula=' . $row["nome"] . '&exact=true" class="list-group-item">
+                                            <h4 class="list-group-item-heading">' . $row["nome"] . '</h4>
+                                            <p class="list-group-item-text">' . $row["info"] . '</p>
+                                            </a>';
+                                }
+                            }
+                        
                     ?>
                 </div>         
             </div>

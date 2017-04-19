@@ -18,11 +18,29 @@
     $time = $_POST["ora"];
     $combinedDT = date('Y-m-d H:i:s', strtotime("$date $time"));
     echo $combinedDT;
-    
-    $stm = $conn->prepare("insert into prenotazioni (username, nome, cognome, nomeAula, data) values (?,?,?,?,?)");
-    $stm->bind_param("sssss", $_POST["username"], $_POST["nome"],$_POST["cognome"],$_POST["nomeAula"], $combinedDT);
+    if(!isset($_POST["exact"])){
+        $stm = $conn->prepare("select nome from aule where nome like ?");
+        $param = "%" . $_POST["nomeAula"] . "%";
+        $stm->bind_param("s",$param);
+        if($stm->execute()){
+            $result = $stm->get_result();
+            $fetchAule = "aule=";
+            while($row = $result->fetch_assoc()){
+                $fetchAule = $fetchAule . $row["nome"] . ";";
+            }
+            header("Location: http://localhost/SitoAule/aule/aule.php?" . $fetchAule);
+            die();
+        }
+    }else{
+        $stm = $conn->prepare("insert into prenotazioni (username, nome, cognome, nomeAula, data) values (?,?,?,?,?)");
+        $stm->bind_param("sssss", $_POST["username"], $_POST["nome"],$_POST["cognome"],$_POST["nomeAula"], $combinedDT);
 
-    if ($stm->execute()) {
-        echo "successo";
+        if ($stm->execute()) {
+            header("Location: http://localhost/SitoAule/results/successo.php");
+        }else{
+            header("Location: http://localhost/SitoAule/results/azioneFallita.php");
+        }
     }
+    
+    
 ?>

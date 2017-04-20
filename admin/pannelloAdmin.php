@@ -29,7 +29,8 @@
                 <a class="buttonWrapper" href="http://localhost/SitoAule/admin/rimuoviForm.php"><button type="button" class="list-group-item">Rimuovi Aula</button></a>
                 <a class="buttonWrapper" href="http://localhost/SitoAule/admin/modificaForm.php"><button type="button" class="list-group-item">Modifica Aula</button></a>
                 <a class="buttonWrapper" href="http://localhost/SitoAule/admin/listaUtenti.php"><button type="button" class="list-group-item">Visiona Utenti</button></a>
-                <a class="buttonWrapper" href="http://localhost/SitoAule/admin/prenotazioniForm.php"><button type="button" class="list-group-item">Visiona Prenotazioni</button></a>
+                <a class="buttonWrapper" href="http://localhost/SitoAule/admin/listaPrenotazioni.php"><button type="button" class="list-group-item">Visiona Prenotazioni</button></a>
+
                 </div>
             </div>
             <div class="col-md-4"></div>

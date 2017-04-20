@@ -40,15 +40,19 @@
                         if ($stm->execute()) {
                             $result = $stm->get_result();
                             while($row = $result->fetch_assoc()){
-                                echo    '<a href="https://localhost/SitoAule/admin/modificaUtenteForm.php?username='. $row["username"] . '&nome=' . $row["nome"] . '&cognome=' . $row["cognome"] . '&hash=' . $row["passwordHash"] . '&admin=' . $row["admin"] . '" class="list-group-item">
-                                         
+                                echo    '<div class="list-group-item">
+                                        
                                         <h4 class="list-group-item-heading">' . $row["username"] . '</h4>
                                         
                                         <p class="list-group-item-text">Nome: ' . $row["nome"] . '</p>
                                         <p class="list-group-item-text">Cognome:' . $row["cognome"] .'</p>
                                         <p class="list-group-item-text">Hash Password:' . $row["passwordHash"] . '</p>
                                         <p class="list-group-item-text">Privilegi di admin:' . $row["admin"] . '</p>
-                                        </a>';
+                                        <div class="btn-group" role="group" aria-label="...">
+                                            <a href="https://localhost/SitoAule/admin/listaPrenotazioni.php?username=' . $row["username"] . '"><button type="button" class="btn btn-default">Visiona prenotazioni</button></a>
+                                            <a href="https://localhost/SitoAule/admin/modificaUtenteForm.php?username=' . $row["username"] . '&nome=' . $row["nome"] . '&cognome=' . $row["cognome"] . '&hash=' . $row["passwordHash"] . '&admin=' . $row["admin"] . '" ><button type="button" class="btn btn-default">Modifica</button></a>
+                                        </div>
+                                        </div>';
                             }
                         }
                 ?>

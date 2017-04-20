@@ -34,8 +34,13 @@
                     if ($conn->connect_error) {
                             die("Connection failed: " . mysqli_connect_error());
                         }
-
-                        $stm = $conn->prepare("select * from prenotazioni");
+                        if(isset($_GET["username"])){
+                            $stm = $conn->prepare("select * from prenotazioni where username = ?");
+                            $stm->bind_param("s", $_GET["username"]);
+                        }else{
+                            $stm = $conn->prepare("select * from prenotazioni");
+                        }
+                        
 
                         if ($stm->execute()) {
                             $result = $stm->get_result();

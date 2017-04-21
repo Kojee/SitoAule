@@ -44,7 +44,7 @@
                         echo '<h4>Prenotazioni attive: </h4>';
                         while($row = $result->fetch_assoc()){
                             $approvata = "";
-                            if($row["approvata"] === "true"){ 
+                            if(isset($row["approvata"])){ 
                                 $approvata = '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ';
                             }
                             echo    '<a href="https://localhost/SitoAule/prenotazioni/miePrenotazioni.php?nomeAula=' . $row["nomeAula"] . '&data=' . $row["data"] . '" class="list-group-item">

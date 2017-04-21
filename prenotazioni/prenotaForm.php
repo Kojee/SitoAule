@@ -49,8 +49,6 @@
                 </div>
                 <div hidden>
                 <input type="text" class="form-control" name="username" value="<?php echo $_SESSION["username"];?>">
-                <input type="text" class="form-control" name="nome" value="<?php echo $_SESSION["nome"];?>">
-                <input type="text" class="form-control" name="cognome" value="<?php echo $_SESSION["cognome"];?>">
                 <?php
                     if(isset($_GET["exact"])){
                         echo '<input type="text" class="form-control" name="exact" value="true">';
@@ -65,14 +63,14 @@
                             die("Connection failed: " . mysqli_connect_error());
                         }
 
-                        $stm = $conn->prepare("select nome, cognome, nomeAula, data from prenotazioni where nomeAula = ?");
+                        $stm = $conn->prepare("select nome, cognome, nomeAula, data from prenotazioni p inner join utenti u on p.username=u.username where nomeAula = ?");
                         $stm->bind_param("s", $_GET["aula"]);
 
                         if ($stm->execute()) {
                             $result = $stm->get_result();
                             while($row = $result->fetch_assoc()){
                                 $approvata = "";
-                                if($row["approvata"] === "true"){ 
+                                if(isset($row["approvata"])){ 
                                     $approvata = '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ';
                                 }
                                 echo    '<a href="https://localhost/SitoAule/aule/aule.php?aula=' . $row["nomeAula"] . '" class="list-group-item">

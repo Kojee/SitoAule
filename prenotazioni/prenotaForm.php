@@ -71,8 +71,12 @@
                         if ($stm->execute()) {
                             $result = $stm->get_result();
                             while($row = $result->fetch_assoc()){
+                                $approvata = "";
+                                if($row["approvata"] === "true"){ 
+                                    $approvata = '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ';
+                                }
                                 echo    '<a href="https://localhost/SitoAule/aule/aule.php?aula=' . $row["nomeAula"] . '" class="list-group-item">
-                                        <h4 class="list-group-item-heading">' . $row["nomeAula"] . '</h4>
+                                        <h4 class="list-group-item-heading">' . $approvata . $row["nomeAula"] . '</h4>
                                         
                                         <p class="list-group-item-text">Prenotata da ' . $row["nome"] . ' ' . $row["cognome"] .' <span class="label label-default date-label">' . $row["data"] . '</span></p>
                                         </a>';

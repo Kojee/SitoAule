@@ -45,15 +45,24 @@
                         if ($stm->execute()) {
                             $result = $stm->get_result();
                             while($row = $result->fetch_assoc()){
-                                echo    '<a href="https://localhost/SitoAule/admin/prenotazioniForm.php?username='. $row["username"] . '&nome=' . $row["nome"] . '&cognome=' . $row["cognome"] . '&data=' . $row["data"] . '&aula=' . $row["nomeAula"] . '" class="list-group-item">
+                                $approvata = "";
+                                if($row["approvata"] === "true"){ 
+                                    $approvata = '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ';
+                                }
+                                echo    '<div class="list-group-item">
                                          
-                                        <h4 class="list-group-item-heading">' . $row["nomeAula"] . '</h4>
+                                        <h4 class="list-group-item-heading">' . $approvata . $row["nomeAula"] . '</h4>
                                         <p class="list-group-item-text">Username:' . $row["username"] . '</p>
                                         <p class="list-group-item-text">Nome: ' . $row["nome"] . '</p>
                                         <p class="list-group-item-text">Cognome:' . $row["cognome"] .'</p>
                                         <p class="list-group-item-text">Data:' . $row["data"] . '</p>
-                                        
-                                        </a>';
+                                        <div class="btn-group" role="group" aria-label="...">
+                                            <a href="https://localhost/SitoAule/admin/richiediInfo.php?username=' . $row["username"] . '&aula=' . $row["nomeAula"] . '&data=' . $row["data"] . '"><button type="button" class="btn btn-default">Richiedi informazioni</button></a>
+                                        </div>
+                                        <div class="btn-group" role="group" aria-label="...">
+                                            <a href="https://localhost/SitoAule/admin/approva.php?username=' . $row["username"] . '&aula=' . $row["nomeAula"] . '&data=' . $row["data"] . '"><button type="button" class="btn btn-default">Approva prenotazione</button></a>
+                                        </div>
+                                        </div>';
                             }
                         }
                 ?>

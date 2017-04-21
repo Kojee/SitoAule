@@ -32,8 +32,8 @@
             die();
         }
     }else{
-        $stm = $conn->prepare("insert into prenotazioni (username, nome, cognome, nomeAula, data) values (?,?,?,?,?)");
-        $stm->bind_param("sssss", $_POST["username"], $_POST["nome"],$_POST["cognome"],$_POST["nomeAula"], $combinedDT);
+        $stm = $conn->prepare("insert into prenotazioni (username, nomeAula, data) values (?,?,?)");
+        $stm->bind_param("sssss", $_POST["username"],$_POST["nomeAula"], $combinedDT);
 
         if ($stm->execute()) {
             header("Location: http://localhost/SitoAule/results/successo.php");

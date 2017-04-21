@@ -38,7 +38,7 @@
                             $stm = $conn->prepare("select * from prenotazioni where username = ?");
                             $stm->bind_param("s", $_GET["username"]);
                         }else{
-                            $stm = $conn->prepare("select * from prenotazioni");
+                            $stm = $conn->prepare("select * from prenotazioni p inner join utenti u on p.username=u.username ");
                         }
                         
 

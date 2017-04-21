@@ -6,7 +6,7 @@
     $password = "";
     $dbname = "utenti";
 
-    $conn = mysqli_connect($servername, $username, $password, $dbname);   
+    $conn = new mysqli($servername, $username, $password, $dbname);   
 ?>
 <html>
     <head>
@@ -28,18 +28,15 @@
             <div class="col-md-4">
                 <div class="list-group">
                     <?php
-                        if (!$conn) {
-                            die("Connection failed: " . mysqli_connect_error());
-                        }
                         if(isset($_GET["aule"])){
                             $aule = explode(";", $_GET["aule"]);
                             $param = "";
                             foreach($aule as $aula){
-                                $param = $param . '"' . $aula . '",';
+                                $param = $param . '"' . mysqli_real_escape_string($conn, $aula) . '",';
                             }
                             $param = $param . '"0"';
+                            
                             $query = "select nome, info from aule where nome in ({$param})";
-                            echo $query;
                             $result = mysqli_query($conn, $query);
                                while($row = mysqli_fetch_assoc($result)) {
                                     

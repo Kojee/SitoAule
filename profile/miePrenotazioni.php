@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(!isset($_SESSION["admin"])){
+    if(!isset($_SESSION["username"])){
         header("Location: http://localhost/SitoAule/index.php");
         die();
     }
@@ -34,12 +34,9 @@
                     if ($conn->connect_error) {
                             die("Connection failed: " . mysqli_connect_error());
                         }
-                        if(isset($_GET["username"])){
-                            $stm = $conn->prepare("select * from prenotazioni p inner join utenti u on p.username=u.username where u.username = ?");
-                            $stm->bind_param("s", $_GET["username"]);
-                        }else{
-                            $stm = $conn->prepare("select * from prenotazioni p inner join utenti u on p.username=u.username ");
-                        }
+                        $stm = $conn->prepare("select * from prenotazioni where username = ?");
+                        $stm->bind_param("s", $_SESSION["username"]);
+                        $stm = $conn->prepare("select * from prenotazioni p inner join utenti u on p.username=u.username ");
                         
 
                         if ($stm->execute()) {
@@ -58,12 +55,6 @@
                                         <p class="list-group-item-text">Data:' . $row["data"] . '</p>
                                         <div class="btn-group" role="group" aria-label="...">
                                             <a href="https://localhost/SitoAule/richiediInfo.php?username=' . $row["username"] . '&aula=' . $row["nomeAula"] . '&data=' . $row["data"] . '"><button type="button" class="btn btn-default">Richiedi informazioni</button></a>
-                                        </div>
-                                        <div class="btn-group" role="group" aria-label="...">
-                                            <a href="https://localhost/SitoAule/admin/approva.php?username=' . $row["username"] . '&aula=' . $row["nomeAula"] . '&data=' . $row["data"] . '"><button type="button" class="btn btn-default">Approva prenotazione</button></a>
-                                        </div>
-                                        <div class="btn-group" role="group" aria-label="...">
-                                            <a href="https://localhost/SitoAule/admin/rifiuta.php?username=' . $row["username"] . '&aula=' . $row["nomeAula"] . '&data=' . $row["data"] . '"><button type="button" class="btn btn-default">Rifiuta prenotazione</button></a>
                                         </div>
                                         </div>';
                             }

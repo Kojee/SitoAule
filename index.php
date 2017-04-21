@@ -27,7 +27,7 @@
                     if(!isset($_COOKIE[$cookieFirstVisitName])){
                         $cookieFirstVisitValue = "true";
                         setcookie($cookieFirstVisitName, $cookieFirstVisitValue, time() + (86400 * 30), "/");
-                        echo    '<h1> Benvenuto nel sito per la prenotazione delle aule dell\'ITIS A. Rossi </h1>
+                        echo    '<h2> Benvenuto nel sito per la prenotazione delle aule dell\'ITIS A. Rossi </h1>
                                 <p>Prima di effettuare qualsiasi prenotazione per un\'aula, registrati: </p>
                                 <p><a class="btn btn-primary btn-lg" href="http://localhost/SitoAule/signupForm.php" role="button">Registrati</a></p>
                                 <p>Se sei già registrato, effettua l\'accesso: </p>
@@ -36,7 +36,7 @@
                         if(strcmp($_COOKIE[$cookieFirstVisitName], "true") == 0){
                             $cookieFirstVisitValue = "true";
                             setcookie($cookieFirstVisitName, $cookieFirstVisitValue, time() + (86400 * 30), "/");
-                            echo    '<h1> Benvenuto nel sito per la prenotazione delle aule dell\'ITIS A. Rossi </h1>
+                            echo    '<h2> Benvenuto nel sito per la prenotazione delle aule dell\'ITIS A. Rossi </h1>
                                     <p>Prima di effettuare qualsiasi prenotazione per un\'aula, registrati: </p>
                                     <p><a class="btn btn-primary btn-lg" href="http://localhost/SitoAule/signupForm.php" role="button">Registrati</a></p>
                                     <p>Se sei già registrato, effettua l\'accesso: </p>
@@ -44,6 +44,7 @@
                         }else{
                             $cookieFirstVisitValue = "false";
                             setcookie($cookieFirstVisitName, $cookieFirstVisitValue, time() + (86400 * 30), "/");
+                            echo    '<h2> Benvenuto nel sito per la prenotazione delle aule dell\'ITIS A. Rossi </h1>';
                         }
                         
                     }

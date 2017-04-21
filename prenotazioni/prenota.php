@@ -17,7 +17,6 @@
     $date = $_POST["data"];
     $time = $_POST["ora"];
     $combinedDT = date('Y-m-d H:i:s', strtotime("$date $time"));
-    echo $combinedDT;
     if(!isset($_POST["exact"])){
         $stm = $conn->prepare("select nome from aule where nome like ?");
         $param = "%" . $_POST["nomeAula"] . "%";
@@ -33,7 +32,7 @@
         }
     }else{
         $stm = $conn->prepare("insert into prenotazioni (username, nomeAula, data) values (?,?,?)");
-        $stm->bind_param("sssss", $_POST["username"],$_POST["nomeAula"], $combinedDT);
+        $stm->bind_param("sss", $_POST["username"],$_POST["nomeAula"], $combinedDT);
 
         if ($stm->execute()) {
             header("Location: http://localhost/SitoAule/results/successo.php");

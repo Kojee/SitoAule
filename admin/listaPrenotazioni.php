@@ -62,6 +62,9 @@
                                         <div class="btn-group" role="group" aria-label="...">
                                             <a href="https://localhost/SitoAule/admin/approva.php?username=' . $row["username"] . '&aula=' . $row["nomeAula"] . '&data=' . $row["data"] . '"><button type="button" class="btn btn-default">Approva prenotazione</button></a>
                                         </div>
+                                        <div class="btn-group" role="group" aria-label="...">
+                                            <a href="https://localhost/SitoAule/admin/rifiuta.php?username=' . $row["username"] . '&aula=' . $row["nomeAula"] . '&data=' . $row["data"] . '"><button type="button" class="btn btn-default">Rifiuta prenotazione</button></a>
+                                        </div>
                                         </div>';
                             }
                         }

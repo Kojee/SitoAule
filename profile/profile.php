@@ -43,8 +43,12 @@
                         $result = $stm->get_result();
                         echo '<h4>Prenotazioni attive: </h4>';
                         while($row = $result->fetch_assoc()){
+                            $approvata = "";
+                            if($row["approvata"] === "true"){ 
+                                $approvata = '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ';
+                            }
                             echo    '<a href="https://localhost/SitoAule/prenotazioni/miePrenotazioni.php?nomeAula=' . $row["nomeAula"] . '&data=' . $row["data"] . '" class="list-group-item">
-                                    <p class="list-group-item-text">' . $row["nomeAula"] . ' ' . ' <span class="label label-default date-label">' . $row["data"] . '</span></p>
+                                    <p class="list-group-item-text">' . $approvata . $row["nomeAula"] . ' ' . ' <span class="label label-default date-label">' . $row["data"] . '</span></p>
                                     </a>';
                         }
                     }

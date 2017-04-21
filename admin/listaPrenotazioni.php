@@ -34,23 +34,36 @@
                     if ($conn->connect_error) {
                             die("Connection failed: " . mysqli_connect_error());
                         }
-
-                        $stm = $conn->prepare("select * from utenti");
+                        if(isset($_GET["username"])){
+                            $stm = $conn->prepare("select * from prenotazioni where username = ?");
+                            $stm->bind_param("s", $_GET["username"]);
+                        }else{
+                            $stm = $conn->prepare("select * from prenotazioni");
+                        }
+                        
 
                         if ($stm->execute()) {
                             $result = $stm->get_result();
                             while($row = $result->fetch_assoc()){
+                                $approvata = "";
+                                if($row["approvata"] === "true"){ 
+                                    $approvata = '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ';
+                                }
                                 echo    '<div class="list-group-item">
-                                        
-                                        <h4 class="list-group-item-heading">' . $row["username"] . '</h4>
-                                        
+                                         
+                                        <h4 class="list-group-item-heading">' . $approvata . $row["nomeAula"] . '</h4>
+                                        <p class="list-group-item-text">Username:' . $row["username"] . '</p>
                                         <p class="list-group-item-text">Nome: ' . $row["nome"] . '</p>
                                         <p class="list-group-item-text">Cognome:' . $row["cognome"] .'</p>
-                                        <p class="list-group-item-text">Hash Password:' . $row["passwordHash"] . '</p>
-                                        <p class="list-group-item-text">Privilegi di admin:' . $row["admin"] . '</p>
+                                        <p class="list-group-item-text">Data:' . $row["data"] . '</p>
                                         <div class="btn-group" role="group" aria-label="...">
-                                            <a href="https://localhost/SitoAule/admin/listaPrenotazioni.php?username=' . $row["username"] . '"><button type="button" class="btn btn-default">Visiona prenotazioni</button></a>
-                                            <a href="https://localhost/SitoAule/admin/modificaUtenteForm.php?username=' . $row["username"] . '&nome=' . $row["nome"] . '&cognome=' . $row["cognome"] . '&hash=' . $row["passwordHash"] . '&admin=' . $row["admin"] . '" ><button type="button" class="btn btn-default">Modifica</button></a>
+                                            <a href="https://localhost/SitoAule/admin/richiediInfo.php?username=' . $row["username"] . '&aula=' . $row["nomeAula"] . '&data=' . $row["data"] . '"><button type="button" class="btn btn-default">Richiedi informazioni</button></a>
+                                        </div>
+                                        <div class="btn-group" role="group" aria-label="...">
+                                            <a href="https://localhost/SitoAule/admin/approva.php?username=' . $row["username"] . '&aula=' . $row["nomeAula"] . '&data=' . $row["data"] . '"><button type="button" class="btn btn-default">Approva prenotazione</button></a>
+                                        </div>
+                                        <div class="btn-group" role="group" aria-label="...">
+                                            <a href="https://localhost/SitoAule/admin/rifiuta.php?username=' . $row["username"] . '&aula=' . $row["nomeAula"] . '&data=' . $row["data"] . '"><button type="button" class="btn btn-default">Rifiuta prenotazione</button></a>
                                         </div>
                                         </div>';
                             }
